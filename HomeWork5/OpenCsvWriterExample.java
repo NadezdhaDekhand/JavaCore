@@ -14,12 +14,12 @@ public class OpenCsvWriterExample {
 
         List<String[]> csvData = createCsvDataSimple();
 
-        try (CSVWriter writer = new CSVWriter(new FileWriter("HomeWork5/test.csv"))) {
+        try (CSVWriter writer = new CSVWriter(new FileWriter("HomeWork5/test1.csv"))) {
             writer.writeAll(csvData);
         }
 
         StringBuilder sb = new StringBuilder();
-        try (BufferedReader reader = Files.newBufferedReader(Paths.get("HomeWork5/test.csv"))) {
+        try (BufferedReader reader = Files.newBufferedReader(Paths.get("HomeWork5/test1.csv"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 sb.append(line).append(System.lineSeparator());
