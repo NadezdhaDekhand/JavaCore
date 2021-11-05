@@ -1,7 +1,6 @@
 package HomeWork__1.HomeWork5;
 
 import com.opencsv.CSVWriter;
-
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -30,6 +29,7 @@ public class OpenCsvWriterExample {
         }
         System.out.println(sb);
     }
+
     private static List<String[]> createCsvDataSimple() {
         String[] header = {"Value 1", "Value 2", "Value 3", "Value 4"};
         String[] record1 = {"100", "200", "300", "400"};
