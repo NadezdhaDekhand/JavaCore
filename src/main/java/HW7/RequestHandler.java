@@ -59,9 +59,22 @@ public class RequestHandler {
 
         Response response = okHttpClient.newCall(request).execute();
         String json = response.body().string();
+        String forecastsJson = objectMapper.readTree(json).at("/DailyForecasts").toString();
+        for (int i = 0; i < 5; i++) {
+
+            String dayForecasts = objectMapper.readTree(forecastsJson).get(i).toString();
+            String maxTemp = objectMapper.readTree(dayForecasts).at("/Temperature")
+                    .at("/Maximum")
+                    .at("/Value").asText();
+            String minTemp = objectMapper.readTree(dayForecasts).at("/Temperature")
+                    .at("/Minimum")
+                    .at("/Value").asText();
+            String date = objectMapper.readTree(dayForecasts).at("/Date").asText();
+            System.out.println(date + " " + maxTemp + " " + minTemp);
+        }
+
 
         return json;
-
     }
     public static String getOneDay(String cityCode) throws IOException {
         HttpUrl httpUrl = new HttpUrl.Builder()
@@ -83,8 +96,11 @@ public class RequestHandler {
 
         Response response = okHttpClient.newCall(request).execute();
         String json = response.body().string();
-
-        return json;
-
+        String forecastsJson = objectMapper.readTree(json).at("/DailyForecasts").toString();
+        String forecastsJson1 = objectMapper.readTree(forecastsJson).get(0).toString();
+        String maxTemp = objectMapper.readTree(forecastsJson1).at("/Temperature")
+                .at("/Maximum")
+                .at("/Value").asText();
+        return "Максимальная температура за 1 день" +maxTemp;
     }
 }
